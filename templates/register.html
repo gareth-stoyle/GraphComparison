@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - GraphComparison{% endblock %}
+
+{% block content %}
+    <h1>Register Page</h1>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-control") }}
+        </div>
+        
+        <div class="mb-3">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control") }}
+        </div>
+        
+        {{ form.submit(class="btn btn-primary") }}
+    </form>  
+{% endblock %}

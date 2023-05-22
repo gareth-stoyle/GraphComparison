@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Graph Creation - GraphComparison{% endblock %}
+
+{% block content %}
+<form id="myForm" action="/compare" method="POST">
+    <div class="mb-3" id="formFields">
+      <div class="input-group mb-3">
+        <input type="text" name="source" class="form-control" placeholder="Source">
+        <input type="text" name="target" class="form-control" placeholder="Target">
+      </div>
+    </div>
+    
+    <button type="button" class="btn btn-primary mb-3" id="addFormField">Add Vertex with Edges</button>
+    <button type="submit" class="btn btn-success mb-3">Submit</button>
+  </form>
+  
+  <a href="{{ url_for('logout') }}" type="button" class="btn btn-danger mb-3">Logout</a>
+  
+  <script>
+    // Get a reference to the button and the container for form fields
+    var addFormFieldButton = document.getElementById("addFormField");
+    var formFieldsContainer = document.getElementById("formFields");
+  
+    // Counter to keep track of the number of form fields
+    var fieldCount = 1;
+  
+    // Function to create new form fields
+    function addFormField() {
+      // Create a new div to group vertex and edge inputs
+      var fieldGroup = document.createElement("div");
+      fieldGroup.className = "input-group mb-3";
+  
+      // Create a new input element for vertex
+      var vertexInput = document.createElement("input");
+      vertexInput.type = "text";
+      vertexInput.name = "vertex" + fieldCount;
+      vertexInput.className = "form-control";
+      vertexInput.placeholder = "Vertex";
+  
+      // Append the vertex input to the field group
+      fieldGroup.appendChild(vertexInput);
+  
+      // Create multiple input elements for edge and weight
+      for (var i = 1; i < 5; i++) {
+        var edgeInput = document.createElement("input");
+        edgeInput.type = "text";
+        edgeInput.name = "edge" + fieldCount;
+        edgeInput.className = "form-control";
+        edgeInput.placeholder = "Edge";
+  
+        var weightInput = document.createElement("input");
+        weightInput.type = "number";
+        weightInput.name = "weight" + fieldCount;
+        weightInput.className = "form-control";
+        weightInput.placeholder = "Weight";
+  
+        // Append the edge and weight inputs to the field group
+        fieldGroup.appendChild(edgeInput);
+        fieldGroup.appendChild(weightInput);
+      }
+  
+      // Append the field group to the container
+      formFieldsContainer.appendChild(fieldGroup);
+  
+      // Increment the field count
+      fieldCount++;
+    }
+  
+    // Add an event listener to the button
+    addFormFieldButton.addEventListener("click", addFormField);
+  </script>  
+{% endblock %}
